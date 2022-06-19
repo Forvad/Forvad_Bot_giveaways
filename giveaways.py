@@ -23,7 +23,6 @@ def headers(r, auth):
                'user-agent': str(random_useragent()),
                'sec-ch-ua-platform': 'Windows',
                'accept-language': 'ru-BY,ru-RU;q=0.9,ru;q=0.8,en-US;q=0.7,en;q=0.6',
-               'accept-encoding': 'gzip, deflate, br',
                'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="102", "Google Chrome";v="102"',
                'x-debug-options': 'bugReporterEnabled',
                'discord-locale': 'ru'
