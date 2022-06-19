@@ -42,9 +42,9 @@ class Update:
                                         '''
                 )
         if 'posix' in name:
-            system('''pip3 install asyncio aiohttp pyuseragents loguru urllib3 sys''')
+            system('''pip3 install asyncio aiohttp pyuseragents loguru urllib3 sys requests''')
         else:
-            system('''pip install asyncio aiohttp pyuseragents loguru urllib3 sys ''')
+            system('''pip install asyncio aiohttp pyuseragents loguru urllib3 sys requests''')
 
 
 
