@@ -42,4 +42,6 @@
 
 * Enter which line to start with
 
+ 🎁   🎉   🎊  ☑   ❤
+
 
