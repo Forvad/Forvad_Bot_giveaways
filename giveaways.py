@@ -9,6 +9,7 @@ from setup import Update
 from urllib3 import disable_warnings
 from os import name
 from json import loads
+from ast import literal_eval
 
 re = "\033[1;31m"
 gr = "\033[1;32m"
@@ -104,6 +105,7 @@ if emoji_bot in '1':
         .split('/')
 elif emoji_bot in '2':
     payload = open('paloyd.txt', 'r', encoding='utf-8').read()
+    payload = literal_eval(payload)
     if len(payload) < 1:
         logger.error('Enter the text in payload.txt')
         Access = False

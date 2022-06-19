@@ -41,10 +41,10 @@ class Update:
                                           https://github.com/Forvad"
                                         '''
                 )
-        if 'posix' in name:
-            system('''pip3 install asyncio aiohttp pyuseragents loguru urllib3 sys requests''')
-        else:
-            system('''pip install asyncio aiohttp pyuseragents loguru urllib3 sys requests''')
+
+        system('''pip3 install asyncio aiohttp pyuseragents loguru urllib3  requests ast''')
+        sleep(5)
+        system('''pip install asyncio aiohttp pyuseragents loguru urllib3  requests ast''')
 
 
 
