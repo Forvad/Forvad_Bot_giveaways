@@ -32,7 +32,7 @@
 
 * `apt install git`
 
-* `git clone https://github.com/Forvad/DS_Bot_Forvad/`
+* `git clone https://github.com/Forvad/Forvad_Bot_giveaways/`
 
 * `cd DS_Bot_Forvad`
 
