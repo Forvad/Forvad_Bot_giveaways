@@ -9,7 +9,6 @@ from setup import Update
 from urllib3 import disable_warnings
 from os import name
 from json import loads
-from ast import literal_eval
 
 re = "\033[1;31m"
 gr = "\033[1;32m"
@@ -34,7 +33,6 @@ def headers(r, auth):
         return headers['authorization']
 
 
-
 async def fetch_url_data(session, url, r):
     if emoji_bot in '1':
         try:
@@ -47,7 +45,6 @@ async def fetch_url_data(session, url, r):
             else:
                 async with session.put(url, timeout=60, headers=headers(r, 'p')) as response:
                     resp = await response.read()
-            return logger.success(f'**Emotion delivered** {headers(r,"e")}')
         except Exception as e:
             print(e)
     else:
@@ -93,6 +90,31 @@ def token_verification(auth):
         return logger.error(f'Token False {headers(auth, "e")} ')
 
 
+def pars_go(auth, chat_id, chat_message):
+    global true_tokens
+    try:
+        session = requests.Session()
+        session.headers['authorization'] = auth
+        r = session.get(f'https://discord.com/api/v9/channels/{chat_id}/messages?limit=50')
+        for text in loads(r.text):
+            if text['id'] in chat_message:
+                for emoji in text['reactions']:
+                    if emoji['me']:
+                        true_tokens += 1
+                        return logger.success(f'Emoji True {auth}')
+                return logger.error(f'Emoji False{auth}')
+    except Exception as error:
+        print(error)
+
+
+def go_parse():
+    global true_tokens
+    true_tokens = 0
+    for i in range(len(token_set)):
+        pars_go(token_set[i], data[0], data[1])
+    print(print(f'{gr}Emoji TRUE: {cy}{true_tokens}{gr} from {re}{len(token_set)}{gr}'))
+
+
 Access = True
 Setup = Update()
 if 'posix' in name:
@@ -101,11 +123,10 @@ else:
     Setup.banner()
 emoji_bot = input(f'{gr}emoji - 1{cy} / {re}bot giveaways - 2{cy} / TEST token - 3\n Enter the:')
 if emoji_bot in '1':
-    data = input(f"{cy}do I need to change the config? {gr}ChanelId{cy}/{re}MessageID{cy}/Emoji\n Enter the: ") \
+    data = input(f"{cy}do I need to change the config? {gr}ChanelId{cy}/{re}MessageID{cy}\nEnter the: ") \
         .split('/')
 elif emoji_bot in '2':
     payload = open('paloyd.txt', 'r', encoding='utf-8').read()
-    payload = literal_eval(payload)
     if len(payload) < 1:
         logger.error('Enter the text in payload.txt')
         Access = False
@@ -141,3 +162,8 @@ if __name__ == '__main__' and Access:
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     loop.run_until_complete(fetch_async(loop, emoji_bot))
+    go_parse()
+
+
+
+
